@@ -82,9 +82,13 @@ const MenuItem = styled.div`
  `;
 
 const Navbar1 = () => {
-  const quantity = useSelector(state=>state.cart.quantity)
-
+  const quantity = useSelector(state=>state.cart.quantity);
+  const user = useSelector((state) => state.user.currentUser);
   
+  const LogOut = (e) => {
+    window.localStorage.clear();
+    window.location.href = "/";
+  }
 
   return (
     <Containers>
@@ -103,12 +107,20 @@ const Navbar1 = () => {
           <Logo>SAM.</Logo>
         </Center>
         <Right>
-          <Link to = "/login" style={{ textDecoration: 'none',color:'black' }}>
+          <Link to = "/" style={{ textDecoration: 'none',color:'black' }}>
+          <MenuItem>Home</MenuItem>
+          </Link>
+
+          {user ? null : <Link to = "/login" style={{ textDecoration: 'none',color:'black' }}>
           <MenuItem>Login</MenuItem>
-          </Link>
-          <Link to ="/Register" style={{ textDecoration: 'none',color:'black' }}>
+          </Link>}
+
+          {user ? <Link to ="/" style={{ textDecoration: 'none',color:'black' }}>
+          <MenuItem onClick={LogOut}>Log Out</MenuItem>
+          </Link> : <Link to ="/Register" style={{ textDecoration: 'none',color:'black' }}>
           <MenuItem>Sign Up</MenuItem>
-          </Link>
+          </Link>}
+
           <Link to= "/cart">
           <MenuItem>
             <Badge badgeContent={quantity} color="primary">

@@ -64,15 +64,16 @@ transition:all 0.5s ease;
 `;
 
 
+
 const Product = ({item}) => {
   return (
     <Container> 
         <Circle/>
         <Image src = {item.img}/>
         <Info>
-            <Icon>
+            {/* <Icon>
                <ShoppingCartOutlined/> 
-            </Icon>
+            </Icon> */}
             <Icon>
               <Link to = {`/product/${item._id}`}>
                <SearchOutlined/> 

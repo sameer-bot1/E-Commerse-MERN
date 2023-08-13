@@ -1,6 +1,7 @@
 import { Facebook, Instagram, MailLockOutlined, Phone, Room, Twitter } from "@mui/icons-material";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
 display:flex;
@@ -97,8 +98,19 @@ const Footer = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
+          
+          <ListItem>
+            <Link to = "/" style={{ textDecoration: 'none',color:'black' }}>
+             <ListItem >Home</ListItem>
+            </Link>
+          </ListItem>
+          
+          <ListItem>
+            <Link to = "/cart" style={{ textDecoration: 'none',color:'black' }}>
+             <ListItem >Cart</ListItem>
+            </Link>
+          </ListItem>
+          
           <ListItem>Man Fashion</ListItem>
           <ListItem>Women Fashion</ListItem>
           <ListItem>Accessories</ListItem>

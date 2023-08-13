@@ -3,6 +3,8 @@ import Navbar1 from "../components/Navbar1";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -127,6 +129,7 @@ font-weight:600;
 
 
 const Cart = () => {
+    const cart = useSelector(state=>state.cart)
   return (
     <Container>
         <Navbar1/>
@@ -134,7 +137,13 @@ const Cart = () => {
         <Wrapper>
             <Title>YOUR BAGS</Title>
             <Top>
-                <TopButton>CONTINUE SHOPPING</TopButton>
+                
+                
+                     <Link to = "/products/:category" style={{ textDecoration: 'none',color:'black' }}>
+                     <TopButton> CONTINUE SHOPPING </TopButton>
+                     </Link>
+                 
+                
                 <TopTexts>
                     <TopText>Shopping Bag</TopText>
                     <TopText>Your Wishlist</TopText>
@@ -143,51 +152,33 @@ const Cart = () => {
             </Top>
             <Button>
                 <Info>
-                    <Product>
-                        <ProductDetail>
-                            <Image src="./image/pd1.png"/>
-                            <Detail>
-                                <ProductName><b>Products: </b> ADIDAS SHIRT  </ProductName>
-                                <ProductId><b>Products: </b> 9384545321 </ProductId>
-                                <ProductColor color="black"/>
-                                <ProductSize><b>Size: </b> 39.5 </ProductSize>
+                    {cart.products.map(product=>(
 
-                            </Detail>
+                        <Product>
+                        <ProductDetail>
+                        <Image src={product.img}/>
+                        <Detail>
+                        <ProductName><b>Products: </b> {product.title}  </ProductName>
+                        <ProductId><b>ID: </b> {product._id} </ProductId>
+                        <ProductColor color={product.color}/>
+                        <ProductSize><b>Size: </b> {product.size}</ProductSize>
+                        
+                        </Detail>
                         </ProductDetail>
                         <PriceDetail>
-                            <ProductAmountContainer>
-                                <Add/>
-                                <ProductAmount>2</ProductAmount>
-                                <Remove/>
-                            </ProductAmountContainer>
-                            <ProductPrice>
-                                Rs 450
-                            </ProductPrice>
+                        <ProductAmountContainer>
+                        <Add/>
+                        <ProductAmount>{product.quantity}</ProductAmount>
+                        <Remove/>
+                        </ProductAmountContainer>
+                        <ProductPrice>
+                        Rs {product.price*product.quantity}
+                        </ProductPrice>
                         </PriceDetail>
-                    </Product>
-                    <hr/>
-                    <Product>
-                        <ProductDetail>
-                            <Image src="./image/pd1.png"/>
-                            <Detail>
-                                <ProductName><b>Products: </b> JESSIE NIKE SHOES </ProductName>
-                                <ProductId><b>Products: </b> 9384545321 </ProductId>
-                                <ProductColor color="black"/>
-                                <ProductSize><b>Size: </b> 39.5 </ProductSize>
-
-                            </Detail>
-                        </ProductDetail>
-                        <PriceDetail>
-                            <ProductAmountContainer>
-                                <Add/>
-                                <ProductAmount>2</ProductAmount>
-                                <Remove/>
-                            </ProductAmountContainer>
-                            <ProductPrice>
-                                Rs 650
-                            </ProductPrice>
-                        </PriceDetail>
-                    </Product>
+                        </Product>
+                        ))}
+                        <hr/>
+                    
                 </Info>
                 <Summary>
                  <SummaryTitle>
@@ -195,7 +186,7 @@ const Cart = () => {
                  </SummaryTitle>
                  <SummaryItem>
                     <SummaryItemText>Subtotal</SummaryItemText>
-                    <SummaryItemPrice>RS 900</SummaryItemPrice>
+                    <SummaryItemPrice>RS {cart.total}</SummaryItemPrice>
                  </SummaryItem> 
                  
                  <SummaryItem>
@@ -210,7 +201,7 @@ const Cart = () => {
                  
                  <SummaryItem type="total">
                     <SummaryItemText>Total</SummaryItemText>
-                    <SummaryItemPrice>RS 900</SummaryItemPrice>
+                    <SummaryItemPrice>RS {cart.total}</SummaryItemPrice>
                  </SummaryItem>
                 <SummaryButton>CHECKOUT NOW </SummaryButton>
                 </Summary>

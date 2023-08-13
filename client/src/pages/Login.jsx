@@ -33,6 +33,11 @@ margin:10px 0px;
 padding:10px;
 `;
 
+const Agreement = styled.span`
+font-size:12px;
+margin:20px 0px;
+`;
+
 const Button = styled.button`
 width:40%;
 border:none;
@@ -52,6 +57,9 @@ font-size:12px;
 text-decoration:underline;
 cursor: pointer;
 `;
+const Error = styled.span`
+  color: red;
+`
 
 const Login = () => {
   const [username,setUsername] = useState("");
@@ -78,8 +86,11 @@ const Login = () => {
                      onChange={(e)=>setPassword(e.target.value)} 
                      />
                     <Button onClick={handleClick} disabled = {isFtching} >SIGN IN</Button>
+                    {error && <Error>Something not right</Error>}
                     <Link>DO NOT YOU REMEMBER THE PASSWORD </Link>
                     <Link>CREATE AN ACCOUNT </Link>
+                    <Agreement>Guest username: <b>admin</b>  PASSWORD:<b> 12655<b></b></b></Agreement>
+
  
                 </Form>
 

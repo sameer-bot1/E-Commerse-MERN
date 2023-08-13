@@ -44,6 +44,9 @@ color:white;
 
 
 const Register = () => {
+
+    
+
     return (
         <Container>
             <Wrapper>

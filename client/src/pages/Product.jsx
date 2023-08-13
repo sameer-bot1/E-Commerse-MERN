@@ -99,17 +99,20 @@ const Product = () => {
     const id = location.pathname.split("/")[2];
 const [product, setProduct] = useState({});
 const [quantity, setQuantity] = useState(1);
+const [color, setColor] = useState();
+const [size, setSize] = useState();
 const dispatch = useDispatch();
 
 useEffect(()=>{
     const getProduct = async () => {
         try{
-          const res = await publicRequest.get("/products/find/"+id);
-          setProduct(res.data);
+          const res = await publicRequest.get("/products/find/" + id);
+          console.log(res);
+          setProduct(res.data);   
         } catch{}
     };
     getProduct()
-}, [id]);
+},[id]);
 
     const handleQuantity = (type) => {
         if(type === "dec"){
@@ -124,7 +127,7 @@ useEffect(()=>{
 
         dispatch(
 
-            addProduct({product,quantity,price:product.price * quantity}));
+            addProduct({ ...product, quantity, color, size }));
     };
 
     return (
@@ -133,28 +136,27 @@ useEffect(()=>{
             <Navbar1 />
             <Wrapper>
                 <ImageContainer>
-                    <Image src= "https://img.freepik.com/free-photo/model-male-casual-natural-adult_1368-2183.jpg?w=360&t=st=1677168271~exp=1677168871~hmac=53fb6d08de88579d681c0d6d46d7ae36a0c23dc739c7e4c0d2d403d163733e63"/>
+                    <Image src= {product.img}/>
                 </ImageContainer>
                 <InfoContainer>
-                    <Title>Denim Jacket</Title>
-                    <Desc> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</Desc>
-                    <Price>₹ 2000</Price>
+                    <Title>{product.title}</Title>
+                    <Desc>{product.desc}</Desc>
+                    <Price>₹ {product.price}</Price>
                     <FilterContainer>
                        <Filter>
-                            <FilterTitle>color</FilterTitle>
-                            <FilterColor color="black"/>
-                            <FilterColor color="darkblue"/>
-                            <FilterColor color="gray"/>
+                            <FilterTitle>Color</FilterTitle>
+                            {product.color?.map((c) =>(
+                                <FilterColor color={c} key={c} onclick={()=>setColor(c)}/>
+                            ))}
+                            
                         </Filter> 
                         <Filter>
                            <FilterTitle>Size</FilterTitle>
-                           <FilterSize>
-                            <FilterSizeOption>XS</FilterSizeOption>
-                            <FilterSizeOption>S</FilterSizeOption>
-                            <FilterSizeOption>M</FilterSizeOption>
-                            <FilterSizeOption>L</FilterSizeOption>
-                            <FilterSizeOption>XL</FilterSizeOption>
+                           <FilterSize onChange={(e)=>setSize(e.target.value)}>
+                            {product.size?.map((s)=>(
 
+                                <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                             ))}
                            </FilterSize>
                         </Filter>
                     </FilterContainer>
@@ -176,4 +178,4 @@ useEffect(()=>{
     )
 }
 
-export default Product
+export default Product;

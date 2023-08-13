@@ -34,26 +34,29 @@ const Option = styled.option``;
 export const ProductList = () => {
     const location = useLocation();
     const cat = location.pathname.split("/")[2];
-    const [filter,setFilters]= useState({}) 
+    const [filters,setFilters]= useState({});
+    const [sort,setsort]= useState("newest");
+
 
     const handleFilters = (e) => {
-        const value  = e.taget.value;
+        const value  = e.target.value;
         setFilters({
+            ...filters,
             [e.target.name]: value,
         });
     };
 
-    console.log(filter)
+   
 
   return (
     <Container>
          <Announcement/>
          <Navbar1/>
-         <Title>Dresses</Title>
+         <Title>Dress</Title>
          <FilterContainer>
             <Filter><FilterText>Filter Products:</FilterText>
                 <Select name="color" onChange={handleFilters}>
-                    <Option disabled seected>
+                    <Option disabled selected>
                         Color
                     </Option>
                     <Option>White</Option>
@@ -76,17 +79,15 @@ export const ProductList = () => {
             </Select>
              </Filter>
             <Filter><FilterText>Sort Product:</FilterText>
-            <Select>
-                    <Option selected>
-                        Newest
-                    </Option>
-                    <Option>Price(asc)</Option>
-                    <Option>Price(desc)</Option>
+            <Select onChange={e => setsort(e.target.value)}>
+                    <Option value="newest">Newest</Option>
+                    <Option value="asc">Price(asc)</Option>
+                    <Option value= "desc">Price(desc)</Option>
                     
             </Select>
              </Filter>
          </FilterContainer>
-         <Products/>
+         <Products cat={cat} filters= {filters} sort={sort} />
          <Newsletter/>
          <Footer/>
     </Container>

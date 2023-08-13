@@ -30,13 +30,13 @@ export const categories = [
         id: 1,
         img: "./image/ok4.png",
         title:"SHIRT STYLE ",
-        cat:"men",
+        cat:"women",
     },
     {
         id: 2,
         img: "./image/ok2.jpeg",
         title:"WINTER STYLE ",
-        cat:"women",
+        cat:"men",
 
     },
     {
