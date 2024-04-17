@@ -130,7 +130,6 @@ color:white;
 font-weight:600;
 `;
 
-
 const Cart = () => {
     const cart = useSelector(state=>state.cart)
   return (
