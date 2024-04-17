@@ -138,8 +138,7 @@ const Cart = () => {
         <Announcement/>
         <Wrapper>
             <Title>YOUR BAGS</Title>
-            <Top>                
-                
+            <Top>
                      <Link to = "/products/:category" style={{ textDecoration: 'none',color:'black' }}>
                      <TopButton> CONTINUE SHOPPING </TopButton>
                      </Link>
