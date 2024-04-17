@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { login } from "../redux/apiCalls";
+import { Link } from 'react-router-dom';
+
 
 const Container = styled.div`
 width:100vw;
@@ -51,7 +53,7 @@ cursor:pointer;
 }
 `;
 
-const Link = styled.a`
+const Link1 = styled.a`
 margin:5px 0px;
 font-size:12px;
 text-decoration:underline;
@@ -87,8 +89,8 @@ const Login = () => {
                      />
                     <Button onClick={handleClick} disabled = {isFtching} >SIGN IN</Button>
                     {error && <Error>Something not right</Error>}
-                    <Link>DO NOT YOU REMEMBER THE PASSWORD </Link>
-                    <Link>CREATE AN ACCOUNT </Link>
+                    <Link1>DO NOT YOU REMEMBER THE PASSWORD </Link1>
+                   <Link1> <Link to ="/register">CREATE AN ACCOUNT </Link></Link1>
                     <Agreement>Guest username: <b>admin</b>  PASSWORD:<b> 12655<b></b></b></Agreement>
 
  

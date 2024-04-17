@@ -1,4 +1,6 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div`
 width:100vw;
@@ -39,28 +41,56 @@ border:none;
 padding:15px 20px;
 background-color:teal;
 color:white;
+cursor:pointer;
 `;
 
 
 
 const Register = () => {
 
+    const [username,setUsername] = useState("");
+    const [password,setPassword ]= useState("");
+    const [email,setEmail ]= useState("");
+    const [error,setError] = useState(false);
     
+    
+    const handleClick = async (e)=> {
+        e.preventDefault();
+        setError(false);
+        try {
+            const res = await publicRequest.post("/auth/register",{
+                username,
+                email,
+                password,
+               });
+            res.data && window.location.replace("/");
+        } catch (err) {
+          setError(true);
+        }
+      
+      };
 
     return (
         <Container>
             <Wrapper>
                 <Title>CREATE AN ACCOUNT</Title>
                 <Form>
-                    <Input placeholder="name" />
-                    <Input placeholder="last name" />
-                    <Input placeholder="username" />
-                    <Input placeholder="email" />
-                    <Input placeholder="password" />
-                    <Input placeholder="confirm password" />
+                    <Input
+                     placeholder="username"
+                     onChange={(e)=>setUsername(e.target.value)}
+                     />
+                    <Input
+                     placeholder="email"
+                     onChange={(e)=>setEmail(e.target.value)}
+                     />
+                    <Input
+                     placeholder="password"
+                     onChange={(e)=>setPassword(e.target.value)}
+                     />
                     <Agreement>By creating an account , i consent to the processing of my personal data in accordance with the <b> PRIVACY POLICY<b></b></b></Agreement>
-                    <Button>CREATE</Button>
+                    <Button onClick={handleClick}>CREATE</Button>
                 </Form>
+                    {error &&  <span style={{color:"red"}}>Username and password already taken...</span>}
 
             </Wrapper>
         </Container>

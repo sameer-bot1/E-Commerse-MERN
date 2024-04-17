@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Container = styled.div``;
 
@@ -66,14 +67,16 @@ flex-direction:column;
 justify-content:space-around;
 `;
 const ProductName = styled.span``;
-const ProductId = styled.span``;
+//const ProductId = styled.span``;
 const ProductColor = styled.div`
     width:20px;
     height:20px;
     border-radius:50%;
     background-color: ${props=> props.color};
 `;
-const ProductSize = styled.span``;
+const ProductSize = styled.span`
+font-size: 20px
+`;
 
 const PriceDetail = styled.div`
 flex:1;
@@ -88,7 +91,7 @@ align-items:center;
 margin-bottom:20px;
 `;
 const ProductAmount = styled.div`
-font-size:24px;
+font-size:20px;
 margin: 5px;
 `;
 const ProductPrice = styled.div`
@@ -130,6 +133,10 @@ font-weight:600;
 
 const Cart = () => {
     const cart = useSelector(state=>state.cart)
+
+
+    
+
   return (
     <Container>
         <Navbar1/>
@@ -159,18 +166,17 @@ const Cart = () => {
                         <Image src={product.img}/>
                         <Detail>
                         <ProductName><b>Products: </b> {product.title}  </ProductName>
-                        <ProductId><b>ID: </b> {product._id} </ProductId>
                         <ProductColor color={product.color}/>
                         <ProductSize><b>Size: </b> {product.size}</ProductSize>
                         
                         </Detail>
                         </ProductDetail>
                         <PriceDetail>
+
                         <ProductAmountContainer>
-                        <Add/>
-                        <ProductAmount>{product.quantity}</ProductAmount>
-                        <Remove/>
+                        <ProductAmount>Quantity: {product.quantity}</ProductAmount>
                         </ProductAmountContainer>
+
                         <ProductPrice>
                         Rs {product.price*product.quantity}
                         </ProductPrice>

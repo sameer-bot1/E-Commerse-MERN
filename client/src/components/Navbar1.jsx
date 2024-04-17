@@ -104,7 +104,7 @@ const Navbar1 = () => {
 
         </Left>
         <Center>
-          <Logo>SAM.</Logo>
+          <Logo>E-Com.</Logo>
         </Center>
         <Right>
           <Link to = "/" style={{ textDecoration: 'none',color:'black' }}>

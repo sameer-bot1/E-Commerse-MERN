@@ -100,7 +100,7 @@ const Product = () => {
 const [product, setProduct] = useState({});
 const [quantity, setQuantity] = useState(1);
 const [color, setColor] = useState();
-const [size, setSize] = useState();
+const [size, setSize] = useState('S');
 const dispatch = useDispatch();
 
 useEffect(()=>{
